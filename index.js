@@ -1,8 +1,25 @@
 const express = require('express');
 const morgan = require('morgan')
-const db = require('./server/db')
-const app = express();
 const PORT = process.env.PORT || 3000;
+const session = require('express-session')
+const passport = require('passport');
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const db = require('./server/db')
+const sessionStore = new SequelizeStore({db})
+const app = express();
+
+
+// passport registration
+passport.serializeUser((user, done) => done(null, user.id))
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await db.models.user.findByPk(id)
+    done(null, user)
+  } catch (err) {
+    done(err)
+  }
+})
 
 const createApp = () => {
   // logging middleware
@@ -12,31 +29,23 @@ const createApp = () => {
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
 
-  app.get("/", (req, res) => res.json({ message: "Hello World" }));
-  app.post("/user", async (req, res) => {
-    try {
-      const newUser = new User(req.body);
-      await newUser.save();
-      res.json({ user: newUser }); // Returns the new user that is created in the database
-    } catch (error) {
-      console.error(error);
-    }
-  });
-  app.get("/user/:userId", async (req, res) => {
-    const userId = req.params.userId;
-    try {
-      const user = await User.findAll({
-        where: {
-          id: userId,
-        },
-      });
-      res.json({ user });
-    } catch (error) {
-      console.error(error);
-  }
-});
+  // session middleware with passport
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: false
+    })
+  )
+  app.use(passport.initialize())
+  app.use(passport.session())
 
-    // error handling endware
+  // auth and api routes
+  app.use('/auth', require('./server/auth'))
+  app.use('/api', require('./server/api'))
+
+  // error handling endware
   app.use((err, req, res, next) => {
     console.error(err)
     console.error(err.stack)
