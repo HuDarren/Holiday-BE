@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/HuDarren/Holiday-BE#readme",
   "dependencies": {
+    "connect-session-sequelize": "^7.0.4",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
