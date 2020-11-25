@@ -1,12 +1,12 @@
-const router = require("express").Router();
-const { User } = require("../db/models");
+const router = require('express').Router();
+const { User } = require('../db/models');
 module.exports = router;
 
 // get all user information
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ["id", "email", "name", "address", "profileImage"],
+      attributes: ['id', 'email', 'name', 'address', 'profileImage'],
     });
     res.json(users);
   } catch (err) {
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 
 // update a existing user
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updatedFields = {
       name: req.body.name,
@@ -31,3 +31,5 @@ router.put("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
+
