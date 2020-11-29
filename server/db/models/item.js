@@ -3,7 +3,7 @@ const db = require('../db');
 
 const Item = db.define('items', {
   data: {
-    type: Sequelize.TEXT,
+    type: Sequelize.JSON,
   },
 });
 

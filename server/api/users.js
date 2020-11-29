@@ -14,6 +14,19 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// find all user by id
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const userId = await User.findOne({
+      where: { id: req.params.id },
+    });
+    res.json(userId);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // update a existing user
 
 router.put('/:id', async (req, res, next) => {
@@ -31,5 +44,3 @@ router.put('/:id', async (req, res, next) => {
     next(err);
   }
 });
-
-

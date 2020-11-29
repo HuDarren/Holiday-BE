@@ -44,6 +44,9 @@ const createApp = () => {
   app.use('/auth', require('./server/auth'));
   app.use('/api', require('./server/api'));
 
+    // static file-serving middleware
+  // app.use(express.static(path.join(__dirname, '..', 'public')))
+
   // error handling endware
   app.use((err, req, res, next) => {
     console.error(err);
@@ -56,6 +59,10 @@ const startListening = () => {
   const server = app.listen(PORT, () =>
     console.log(`Example app listening on port ${PORT}`)
   );
+
+  // set up our socket control center
+  // const io = socketio(server);
+  // require('./socket')(io);
 };
 
 // Note: using `{ force: true }` will drop the table if it already exists
