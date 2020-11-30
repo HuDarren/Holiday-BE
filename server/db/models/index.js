@@ -1,10 +1,9 @@
 const User = require('./user');
 const Group = require('./group');
 const Item = require('./item');
+const WishList = require('./wishlist');
 
 // -------Associations --------------
-
-User.hasMany(Item);
 
 Group.belongsTo(User);
 
@@ -14,10 +13,15 @@ User.belongsToMany(Group, {
   foreignKey: 'userId',
 });
 
+User.hasMany(WishList);
+
+WishList.hasMany(Item);
+
 //------------------------------------
 
 module.exports = {
   User,
   Group,
   Item,
+  WishList,
 };
