@@ -11,7 +11,7 @@ const WishList = db.define('wishlists', {
   image: {
     type: Sequelize.TEXT,
     defaultValue:
-      'https://res.cloudinary.com/dsi0jbonx/image/upload/v1607120302/present_jy05hb.png',
+      'https://res.cloudinary.com/dsi0jbonx/image/upload/v1607142040/present_kjqse1.jpg',
   },
 });
 

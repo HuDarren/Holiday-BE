@@ -9,8 +9,20 @@ Group.belongsTo(User);
 
 User.belongsToMany(Group, {
   as: 'follower',
-  through: 'follow',
+  through: 'group-follow',
   foreignKey: 'userId',
+});
+
+User.belongsToMany(User, {
+  as: 'friend-follower',
+  through: 'friend-follow',
+  foreignKey: 'userId',
+});
+
+User.belongsToMany(User, {
+  as: 'friend-following',
+  through: 'friend-follow',
+  foreignKey: 'followerId',
 });
 
 User.hasMany(WishList);
