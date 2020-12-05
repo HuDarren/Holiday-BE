@@ -9,7 +9,7 @@ router.get('/:id', async (req, res, next) => {
     const groupId = req.params.id;
     const groupData = await Group.findAll({
       where: {
-        Id: groupId,
+        id: groupId,
       },
     });
     res.json(groupData);
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const userData = await Group.findAll({
+    const groupData = await Group.findAll({
       where: {
         userId: userId,
       },
@@ -34,4 +34,33 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// create a new group
 
+router.post('/:id', async (req, res, next) => {
+  try {
+    const group = await Group.create({
+      name: req.body.name,
+      description: req.body.description,
+      userId: req.params.id,
+    });
+    res.json(group);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// update a group
+
+// delete a group
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const removeInfo = await Group.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.json(removeInfo);
+  } catch (error) {
+    next(error);
+  }
+});
