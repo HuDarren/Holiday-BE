@@ -18,6 +18,21 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// Create a new group
+router.post('/', async(req, res, next) => {
+  try {
+    const { name, description, groupImg, creatorId } = req.body;
+    const newGroup = await Group.create({
+      name,
+      description,
+      groupImg,
+      creatorId,
+    })
+    res.json(newGroup);
+  } catch (error) {
+    next(error);
+  }
+})
 
 // delete a group
 router.delete('/:id', async (req, res, next) => {
