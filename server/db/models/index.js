@@ -6,11 +6,11 @@ const WishList = require('./wishlist');
 // -------Associations --------------
 
 User.belongsToMany(Group, {
-  through: 'followers',
+  through: 'following',
 });
 
 Group.belongsToMany(User, {
-  through: 'followers',
+  through: 'following',
 });
 
 User.hasMany(WishList);
