@@ -2,6 +2,18 @@ const router = require('express').Router();
 const { Group, User } = require('../db/models');
 module.exports = router;
 
+// Find group & add user
+router.post('/:groupId/add-user/:userId', async(req, res, next) => {
+  try {
+    const { groupId, userId } = req.params;
+    const group = await Group.findOne({ where: { id: groupId}})
+    const following = await group.addUser(userId);
+    res.json(following);
+  } catch (error) {
+    next(error);
+  }
+})
+
 // Get group & followers data by id
 router.get('/:id', async (req, res, next) => {
   try {
