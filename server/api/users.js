@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../db/models');
+const { User, Group } = require('../db/models');
 module.exports = router;
 
 // get all user information
@@ -20,6 +20,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const userId = await User.findOne({
       where: { id: req.params.id },
+      include: { model: Group, attributes: []}
     });
     res.json(userId);
   } catch (err) {
