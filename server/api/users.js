@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../db/models');
+const { User, Group } = require('../db/models');
 module.exports = router;
 
 // get all user information
@@ -45,5 +45,18 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+// get all users  associated with the group id
 
-
+router.get('/group/:id', async (req, res, next) => {
+  try {
+    let group = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [{ model: Group, as: follower }],
+    });
+    res.json(group);
+  } catch (error) {
+    next(error);
+  }
+});
