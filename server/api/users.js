@@ -45,3 +45,19 @@ router.put('/:id', async (req, res, next) => {
     next(err);
   }
 });
+
+// get all users  associated with the group id
+
+router.get('/group/:id', async (req, res, next) => {
+  try {
+    let group = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [{ model: Group, as: follower }],
+    });
+    res.json(group);
+  } catch (error) {
+    next(error);
+  }
+});
