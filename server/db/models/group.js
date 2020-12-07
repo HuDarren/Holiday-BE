@@ -18,6 +18,12 @@ const Group = db.define('groups', {
     type: Sequelize.TEXT,
     defaultValue: '',
   },
+  creatorId: {
+    type: Sequelize.INTEGER,
+    validate: {
+      notEmpty: true,
+    }
+  }
 });
 
 module.exports = Group;

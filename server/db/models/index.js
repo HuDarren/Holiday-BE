@@ -5,12 +5,12 @@ const WishList = require('./wishlist');
 
 // -------Associations --------------
 
-Group.belongsTo(User);
-
 User.belongsToMany(Group, {
-  as: 'follower',
-  through: 'group-follow',
-  foreignKey: 'userId',
+  through: 'group-following',
+});
+
+Group.belongsToMany(User, {
+  through: 'group-following',
 });
 
 User.belongsToMany(User, {
