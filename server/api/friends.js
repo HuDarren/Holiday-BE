@@ -2,15 +2,15 @@ const router = require('express').Router();
 const { User } = require('../db/models');
 module.exports = router;
 
-// get all following id
+// get all follower by userid
 
-router.get('/follow/:id', async (req, res, next) => {
+router.get('/follower/:id', async (req, res, next) => {
   try {
     let user = await User.findOne({
       where: {
         id: req.params.id,
       },
-      include: [{ model: User, as: 'friend-following' }],
+      include: [{ model: User, as: 'following' }],
     });
     res.json(user);
   } catch (error) {
@@ -18,14 +18,14 @@ router.get('/follow/:id', async (req, res, next) => {
   }
 });
 
-// get all follower id
-router.get('/follower/:id', async (req, res, next) => {
+// get all follow by userid
+router.get('/follow/:id', async (req, res, next) => {
   try {
     let user = await User.findOne({
       where: {
         id: req.params.id,
       },
-      include: [{ model: User, as: 'friend-follower' }],
+      include: [{ model: User, as: 'follower' }],
     });
     res.json(user);
   } catch (error) {

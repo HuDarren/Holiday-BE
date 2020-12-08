@@ -14,13 +14,13 @@ Group.belongsToMany(User, {
 });
 
 User.belongsToMany(User, {
-  as: 'friend-follower',
+  as: 'follower',
   through: 'friend-follow',
   foreignKey: 'userId',
 });
 
 User.belongsToMany(User, {
-  as: 'friend-following',
+  as: 'following',
   through: 'friend-follow',
   foreignKey: 'followerId',
 });

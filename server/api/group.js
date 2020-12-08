@@ -14,7 +14,7 @@ router.post('/:groupId/add-user/:userId', async (req, res, next) => {
   }
 });
 
-// Get group & followers data by id
+// Get group data by group id
 router.get('/:id', async (req, res, next) => {
   try {
     const groupId = req.params.id;
