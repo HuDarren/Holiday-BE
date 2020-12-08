@@ -49,4 +49,18 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+// get all users by name
 
+router.get('/search/:name', async (req, res, next) => {
+  try {
+    const name = req.params.name;
+    const info = await User.findAll({
+      where: {
+        name: name,
+      },
+    });
+    res.json(info);
+  } catch (error) {
+    next(error);
+  }
+});
