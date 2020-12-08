@@ -20,7 +20,10 @@ router.get('/:id', async (req, res, next) => {
   try {
     const userId = await User.findOne({
       where: { id: req.params.id },
-      include: { model: Group, attributes: []}
+      include: {
+        model: Group,
+        attributes: ['id', 'name', 'description', 'groupImg'],
+      },
     });
     res.json(userId);
   } catch (err) {
@@ -46,18 +49,4 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-// get all users  associated with the group id
 
-router.get('/group/:id', async (req, res, next) => {
-  try {
-    let group = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: [{ model: Group, as: follower }],
-    });
-    res.json(group);
-  } catch (error) {
-    next(error);
-  }
-});

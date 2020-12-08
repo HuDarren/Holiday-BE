@@ -3,16 +3,16 @@ const { Group, User } = require('../db/models');
 module.exports = router;
 
 // Find group & add user
-router.post('/:groupId/add-user/:userId', async(req, res, next) => {
+router.post('/:groupId/add-user/:userId', async (req, res, next) => {
   try {
     const { groupId, userId } = req.params;
-    const group = await Group.findOne({ where: { id: groupId}})
+    const group = await Group.findOne({ where: { id: groupId } });
     const following = await group.addUser(userId);
     res.json(following);
   } catch (error) {
     next(error);
   }
-})
+});
 
 // Get group & followers data by id
 router.get('/:id', async (req, res, next) => {
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
       where: {
         id: groupId,
       },
-      include: { model: User}
+      include: { model: User },
     });
     res.json(groupData);
   } catch (error) {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // Create a new group
-router.post('/', async(req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const { name, description, groupImg, creatorId } = req.body;
     const newGroup = await Group.create({
@@ -39,12 +39,12 @@ router.post('/', async(req, res, next) => {
       description,
       groupImg,
       creatorId,
-    })
+    });
     res.json(newGroup);
   } catch (error) {
     next(error);
   }
-})
+});
 
 // delete a group
 router.delete('/:id', async (req, res, next) => {
