@@ -14,6 +14,21 @@ router.post('/:groupId/add-user/:userId', async (req, res, next) => {
   }
 });
 
+// Find Group and remove user
+router.delete('/:groupId/add-user/:userId', async (req, res, next) => {
+  try {
+    const group = await Group.findOne({
+      where: {
+        id: req.params.groupId,
+      },
+    });
+    const removeGroup = await group.removeUser(req.params.userId);
+    res.json(removeGroup);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Get group data by group id
 router.get('/:id', async (req, res, next) => {
   try {
