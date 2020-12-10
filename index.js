@@ -44,7 +44,7 @@ const createApp = () => {
   app.use('/auth', require('./server/auth'));
   app.use('/api', require('./server/api'));
 
-    // static file-serving middleware
+  // static file-serving middleware
   // app.use(express.static(path.join(__dirname, '..', 'public')))
 
   // error handling endware
@@ -66,7 +66,7 @@ const startListening = () => {
 };
 
 // Note: using `{ force: true }` will drop the table if it already exists
-const syncDb = () => db.sync();
+const syncDb = () => db.sync({ });
 
 async function bootApp() {
   await syncDb();

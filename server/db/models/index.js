@@ -19,11 +19,11 @@ User.belongsToMany(User, {
   foreignKey: 'userId',
 });
 
-User.belongsToMany(User, {
-  as: 'following',
-  through: 'friendFollow',
-  foreignKey: 'followerId',
-});
+// User.belongsToMany(User, {
+//   as: 'following',
+//   through: 'friendFollow',
+//   foreignKey: 'followerId',
+// });
 
 User.hasMany(WishList);
 
