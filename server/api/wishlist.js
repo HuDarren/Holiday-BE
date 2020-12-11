@@ -36,14 +36,14 @@ router.post('/:id', async (req, res, next) => {
 
 // update wishlist
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:userId/:wishId', async (req, res, next) => {
   try {
     const updateFields = {
       name: req.body.name,
       description: req.body.description,
     };
     const ListInfo = await WishList.update(updateFields, {
-      where: { userId: req.params.id },
+      where: { userId: req.params.userId, id: req.params.wishId },
     });
     res.json(ListInfo);
   } catch (error) {

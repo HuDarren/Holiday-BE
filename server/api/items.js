@@ -35,7 +35,7 @@ router.delete('/:id', async (req, res, next) => {
 
 // update a item
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:wishid/:itemid', async (req, res, next) => {
   try {
     const updateFields = {
       name: req.body.name,
@@ -44,7 +44,8 @@ router.put('/:id', async (req, res, next) => {
     };
     const ListInfo = await Item.update(updateFields, {
       where: {
-        id: req.params.id,
+        id: req.params.itemid,
+        wishlistId: req.params.wishid,
       },
     });
     res.json(ListInfo);
