@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Group, User } = require('../db/models');
+const { route } = require('./items');
 module.exports = router;
 
 // Find group & add user
@@ -45,8 +46,21 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// get groups by user id
+
+router.get('/creator/:id', async (req, res, next) => {
+  try {
+    const groups = await Group.findAll({
+      where: { userId: req.params.id },
+    });
+    res.json(groups);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Create a new group
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
   try {
     const { name, description, groupImg, creatorId } = req.body;
     const newGroup = await Group.create({
@@ -54,6 +68,7 @@ router.post('/', async (req, res, next) => {
       description,
       groupImg,
       creatorId,
+      userId: req.params.id,
     });
     res.json(newGroup);
   } catch (error) {
@@ -70,6 +85,25 @@ router.delete('/:id', async (req, res, next) => {
       },
     });
     res.json(removeInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/:groupId/:userId', async (req, res, next) => {
+  try {
+    const updateFields = {
+      name: req.body.name,
+      description: req.body.description,
+      groupImg: req.body.groupImg,
+      userId: req.params.userId,
+    };
+    const update = await Group.update(updateFields, {
+      where: {
+        id: req.params.groupId,
+      },
+    });
+    res.json(update);
   } catch (error) {
     next(error);
   }

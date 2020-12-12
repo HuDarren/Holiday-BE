@@ -25,6 +25,8 @@ User.belongsToMany(User, {
   foreignKey: 'followerId',
 });
 
+User.hasMany(Group)
+
 User.hasMany(WishList);
 
 WishList.hasMany(Item);

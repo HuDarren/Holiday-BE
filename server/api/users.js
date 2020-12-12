@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
       where: { id: req.params.id },
       include: {
         model: Group,
-        attributes: ['id', 'name', 'description', 'groupImg'],
+        attributes: ['id', 'name', 'description', 'groupImg',"userId"],
       },
     });
     res.json(userId);
