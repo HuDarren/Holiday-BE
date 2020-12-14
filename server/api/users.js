@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Group } = require('../db/models');
+const { Op } = require('sequelize');
 module.exports = router;
 
 // get all user information
@@ -22,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
       where: { id: req.params.id },
       include: {
         model: Group,
-        attributes: ['id', 'name', 'description', 'groupImg',"userId"],
+        attributes: ['id', 'name', 'description', 'groupImg', 'userId'],
       },
     });
     res.json(userId);
@@ -56,7 +57,9 @@ router.get('/search/:name', async (req, res, next) => {
     const name = req.params.name;
     const info = await User.findAll({
       where: {
-        name: name,
+        name: {
+          [Op.iLike]: '%' + name + '%',
+        },
       },
     });
     res.json(info);
@@ -64,5 +67,3 @@ router.get('/search/:name', async (req, res, next) => {
     next(error);
   }
 });
-
-
