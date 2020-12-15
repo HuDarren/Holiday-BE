@@ -11,7 +11,7 @@ const Item = db.define('items', {
   Image: {
     type: Sequelize.STRING,
     defaultValue:
-      'https://mpng.subpng.com/20180203/poe/kisspng-gift-red-christmas-birthday-clip-art-small-present-cliparts-5a7581cde5e902.6028480315176503819417.jpg',
+      'https://res.cloudinary.com/dsi0jbonx/image/upload/v1607142040/present_kjqse1.jpg',
   },
 });
 

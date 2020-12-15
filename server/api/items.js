@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Item } = require('../db/models');
+const { Item , WishList} = require('../db/models');
+// const WishList = require('../db/models/wishlist');
 module.exports = router;
 
 // get all data by wishlistId
@@ -11,6 +12,7 @@ router.get('/:id', async (req, res, next) => {
       where: {
         wishlistId: wishlistId,
       },
+      include: { model: WishList },
     });
     res.json(userData);
   } catch (error) {
