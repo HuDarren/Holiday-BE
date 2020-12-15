@@ -15,16 +15,13 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// find all user by id
+// find all user by id and get their group follows 
 
 router.get('/:id', async (req, res, next) => {
   try {
     const userId = await User.findOne({
       where: { id: req.params.id },
-      include: {
-        model: Group,
-        attributes: ['id', 'name', 'description', 'groupImg', 'userId'],
-      },
+      include: [{ model: Group, as: 'UserFollow' }],
     });
     res.json(userId);
   } catch (err) {

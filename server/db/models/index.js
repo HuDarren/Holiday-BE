@@ -7,10 +7,12 @@ const WishList = require('./wishlist');
 
 User.belongsToMany(Group, {
   through: 'groupFollowing',
+  as: 'UserFollow',
 });
 
 Group.belongsToMany(User, {
   through: 'groupFollowing',
+  as: 'GroupFollow',
 });
 
 User.belongsToMany(User, {
@@ -25,11 +27,13 @@ User.belongsToMany(User, {
   foreignKey: 'followerId',
 });
 
-User.hasMany(Group)
+User.hasMany(Group);
 
 User.hasMany(WishList);
 
 WishList.hasMany(Item);
+
+Item.belongsTo(WishList);
 
 //------------------------------------
 
