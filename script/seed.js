@@ -99,11 +99,11 @@ async function seed() {
 
   console.log(`seeded ${items.length} item`);
 
-  const group = await Group.findOne({ where: { id: 1 } });
-  const following = await group.addUsers([1, 2]);
+  // const group = await Group.findOne({ where: { id: 1 } });
+  // const following = await group.addUsers([1, 2]);
 
 
-  console.log(`seeded ${following.length} followings to group 1`);
+  // console.log(`seeded ${following.length} followings to group 1`);
   console.log(`seeded successfully`);
 }
 
