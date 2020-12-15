@@ -38,7 +38,7 @@ router.get('/:id', async (req, res, next) => {
       where: {
         id: groupId,
       },
-      include: { model: User },
+      include: { model: User, as: 'GroupFollow' },
     });
     res.json(groupData);
   } catch (error) {
@@ -71,6 +71,9 @@ router.post('/:id', async (req, res, next) => {
       userId: req.params.id,
     });
     res.json(newGroup);
+    
+
+
   } catch (error) {
     next(error);
   }
