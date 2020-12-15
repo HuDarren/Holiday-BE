@@ -16,14 +16,15 @@ const Group = db.define('groups', {
   },
   groupImg: {
     type: Sequelize.TEXT,
-    defaultValue: '',
+    defaultValue:
+      'https://res.cloudinary.com/dsi0jbonx/image/upload/v1604683709/christmas_bg3_maguug.png',
   },
   creatorId: {
     type: Sequelize.INTEGER,
     validate: {
       notEmpty: true,
-    }
-  }
+    },
+  },
 });
 
 module.exports = Group;
