@@ -1,3 +1,4 @@
+const { DATEONLY } = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -24,6 +25,19 @@ const Group = db.define('groups', {
     validate: {
       notEmpty: true,
     },
+  },
+  exchangeDate: {
+    type: Sequelize.DATE,
+    // get: function () {
+    //   return moment.utc(this.getDataValue('regDate')).format('YYYY-MM-DD');
+    // },
+    defaultValue: Sequelize.NOW,
+  },
+  budget: {
+    type: Sequelize.INTEGER,
+  },
+  match: {
+    type: Sequelize.JSON,
   },
 });
 
