@@ -30,6 +30,8 @@ async function seed() {
       name: 'Christmas Party',
       description: 'We Ho-Ho-Hope You Can Join Us',
       creatorId: 1,
+
+      budget: 10.0,
       userId: 1,
     }),
     Group.create({
@@ -37,12 +39,16 @@ async function seed() {
       description: `Friends, family, and holiday cheer,
     Make Christmas the most wonderful time of the year!`,
       creatorId: 2,
+
+      budget: 10.0,
       userId: 2,
     }),
     Group.create({
       name: 'Happy Birthday',
       description: `Lets celebrate birthday!`,
       creatorId: 3,
+
+      budget: 10.0,
       userId: 3,
     }),
   ]);
@@ -101,7 +107,6 @@ async function seed() {
 
   // const group = await Group.findOne({ where: { id: 1 } });
   // const following = await group.addUsers([1, 2]);
-
 
   // console.log(`seeded ${following.length} followings to group 1`);
   console.log(`seeded successfully`);
