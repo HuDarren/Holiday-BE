@@ -8,7 +8,7 @@ router.post('/:groupId/add-user/:userId', async (req, res, next) => {
   try {
     const { groupId, userId } = req.params;
     const group = await Group.findOne({ where: { id: groupId } });
-    const following = await group.addUser(userId);
+    const following = await group.addGroupFollow(userId);
     res.json(following);
   } catch (error) {
     next(error);
@@ -23,7 +23,7 @@ router.delete('/:groupId/add-user/:userId', async (req, res, next) => {
         id: req.params.groupId,
       },
     });
-    const removeGroup = await group.removeUser(req.params.userId);
+    const removeGroup = await group.removeGroupFollow(req.params.userId);
     res.json(removeGroup);
   } catch (error) {
     next(error);
@@ -62,18 +62,16 @@ router.get('/creator/:id', async (req, res, next) => {
 // Create a new group
 router.post('/:id', async (req, res, next) => {
   try {
-    const { name, description, groupImg, creatorId } = req.body;
+    const { name, description, groupImg, creatorId, match } = req.body;
     const newGroup = await Group.create({
       name,
       description,
       groupImg,
       creatorId,
+      match,
       userId: req.params.id,
     });
     res.json(newGroup);
-    
-
-
   } catch (error) {
     next(error);
   }
@@ -100,6 +98,9 @@ router.put('/:groupId/:userId', async (req, res, next) => {
       description: req.body.description,
       groupImg: req.body.groupImg,
       userId: req.params.userId,
+      exchangeDate: req.body.exchangeDate,
+      budget: req.body.budget,
+      match: req.body.match,
     };
     const update = await Group.update(updateFields, {
       where: {
