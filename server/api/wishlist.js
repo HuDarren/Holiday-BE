@@ -26,6 +26,7 @@ router.post('/:id', async (req, res, next) => {
       name: req.body.name,
       description: req.body.description,
       userId: req.params.id,
+      image: req.body.image
     });
 
     res.json(List);
@@ -41,6 +42,7 @@ router.put('/:userId/:wishId', async (req, res, next) => {
     const updateFields = {
       name: req.body.name,
       description: req.body.description,
+      image: req.body.image
     };
     const ListInfo = await WishList.update(updateFields, {
       where: { userId: req.params.userId, id: req.params.wishId },
