@@ -1,4 +1,3 @@
-const { DATEONLY } = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -20,12 +19,6 @@ const Group = db.define('groups', {
     defaultValue:
       'https://res.cloudinary.com/dsi0jbonx/image/upload/v1604683709/christmas_bg3_maguug.png',
   },
-  creatorId: {
-    type: Sequelize.INTEGER,
-    validate: {
-      notEmpty: true,
-    },
-  },
   exchangeDate: {
     type: Sequelize.DATE,
     // get: function () {
@@ -39,6 +32,11 @@ const Group = db.define('groups', {
   match: {
     type: Sequelize.JSON,
   },
+});
+
+Group.afterCreate(async (group) => {
+  const{userId}= group;
+  await group.addGroupFollow(userId)
 });
 
 module.exports = Group;
