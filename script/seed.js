@@ -29,8 +29,6 @@ async function seed() {
     Group.create({
       name: 'Christmas Party',
       description: 'We Ho-Ho-Hope You Can Join Us',
-      creatorId: 1,
-
       budget: 10.0,
       userId: 1,
     }),
@@ -38,16 +36,12 @@ async function seed() {
       name: 'Holly Jolly Secret Santa',
       description: `Friends, family, and holiday cheer,
     Make Christmas the most wonderful time of the year!`,
-      creatorId: 2,
-
       budget: 10.0,
       userId: 2,
     }),
     Group.create({
       name: 'Happy Birthday',
       description: `Lets celebrate birthday!`,
-      creatorId: 3,
-
       budget: 10.0,
       userId: 3,
     }),

@@ -62,12 +62,11 @@ router.get('/creator/:id', async (req, res, next) => {
 // Create a new group
 router.post('/:id', async (req, res, next) => {
   try {
-    const { name, description, groupImg, creatorId, match } = req.body;
+    const { name, description, groupImg, match } = req.body;
     const newGroup = await Group.create({
       name,
       description,
       groupImg,
-      creatorId,
       match,
       userId: req.params.id,
     });
