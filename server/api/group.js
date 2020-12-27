@@ -67,8 +67,9 @@ router.post('/:id', async (req, res, next) => {
       name,
       description,
       groupImg,
-      creatorId,
       match,
+      budget,
+      exchangeDate,
       userId: req.params.id,
     });
     res.json(newGroup);
