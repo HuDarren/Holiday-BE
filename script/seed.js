@@ -9,17 +9,32 @@ async function seed() {
     User.create({
       email: 'amy@email.com',
       password: '123456',
-      name: 'Tester Amy',
+      name: 'Amy',
     }),
     User.create({
       email: 'bruce@email.com',
       password: '123456',
-      name: 'Tester Bruce',
+      name: 'Bruce',
     }),
     User.create({
       email: 'corvus@email.com',
       password: '123456',
-      name: 'Tester Corvus',
+      name: 'Corvus',
+    }),
+        User.create({
+      email: 'darren@email.com',
+      password: '123456',
+      name: 'Darren',
+    }),
+        User.create({
+      email: 'evan@email.com',
+      password: '123456',
+      name: 'Evan',
+    }),
+        User.create({
+      email: 'fanny@email.com',
+      password: '123456',
+      name: 'Fanny',
     }),
   ]);
 
@@ -29,8 +44,7 @@ async function seed() {
     Group.create({
       name: 'Christmas Party',
       description: 'We Ho-Ho-Hope You Can Join Us',
-      creatorId: 1,
-
+     
       budget: 10.0,
       userId: 1,
     }),
@@ -38,16 +52,14 @@ async function seed() {
       name: 'Holly Jolly Secret Santa',
       description: `Friends, family, and holiday cheer,
     Make Christmas the most wonderful time of the year!`,
-      creatorId: 2,
-
+   
       budget: 10.0,
       userId: 2,
     }),
     Group.create({
       name: 'Happy Birthday',
       description: `Lets celebrate birthday!`,
-      creatorId: 3,
-
+   
       budget: 10.0,
       userId: 3,
     }),
@@ -64,12 +76,27 @@ async function seed() {
     WishList.create({
       name: 'Cards',
       description: 'Fun Cards',
-      userId: 2,
+      userId: 3,
     }),
     WishList.create({
       name: 'Electronic',
       description: 'Fun Electronic',
+      userId: 1,
+    }),
+        WishList.create({
+      name: 'Videogames',
+      description: 'Fun Videogames',
+      userId: 1,
+    }),
+        WishList.create({
+      name: 'BoardGames',
+      description: 'Fun Boardgames',
       userId: 2,
+    }),
+        WishList.create({
+      name: 'Clothes',
+      description: 'Fun Clothes',
+      userId: 3,
     }),
   ]);
 
@@ -81,25 +108,45 @@ async function seed() {
       description: 'Toy Car',
       wishlistId: 1,
     }),
-    Item.create({
+       Item.create({
       name: 'Plane',
       description: 'Toy Plane',
       wishlistId: 1,
     }),
+       Item.create({
+      name: 'Truck',
+      description: 'Toy Truck',
+      wishlistId: 1,
+    }),
+       Item.create({
+      name: 'Playstation',
+      description: 'Playstation Console',
+      wishlistId: 4,
+    }),
+       Item.create({
+      name: 'Xbox ',
+      description: "Xbox Console",
+      wishlistId: 4,
+    }),
     Item.create({
-      name: 'Pokemon',
+      name: 'Nintendo Switch',
+      description: 'Nintendo Switch Console',
+      wishlistId: 4,
+    }),
+    Item.create({
+      name: '',
       description: 'CardGame',
-      wishlistId: 2,
+      wishlistId: 5,
     }),
     Item.create({
       name: 'Digimon',
       description: 'CardGame',
-      wishlistId: 2,
+      wishlistId: 5,
     }),
     Item.create({
       name: 'Iphone',
       description: 'Phone',
-      wishlistId: 3,
+      wishlistId: 5,
     }),
   ]);
 
