@@ -66,7 +66,7 @@ const startListening = () => {
 };
 
 // Note: using `{ force: true }` will drop the table if it already exists
-const syncDb = () => db.sync({ });
+const syncDb = () => db.sync();
 
 async function bootApp() {
   await syncDb();
