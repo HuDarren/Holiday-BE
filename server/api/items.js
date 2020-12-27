@@ -42,7 +42,9 @@ router.put('/:wishid/:itemid', async (req, res, next) => {
     const updateFields = {
       name: req.body.name,
       description: req.body.description,
-      image: req.body.image,
+      Image: req.body.Image,
+    
+
     };
     const ListInfo = await Item.update(updateFields, {
       where: {
@@ -63,7 +65,7 @@ router.post('/:id', async (req, res, next) => {
     const newItem = await Item.create({
       name: req.body.name,
       description: req.body.description,
-      Image: req.body.image,
+      Image: req.body.Image,
       wishlistId: req.params.id,
     });
     res.json(newItem);
