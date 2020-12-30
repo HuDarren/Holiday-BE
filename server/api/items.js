@@ -39,13 +39,9 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:wishid/:itemid', async (req, res, next) => {
   try {
-    const updateFields = {
-      name: req.body.name,
-      description: req.body.description,
-      Image: req.body.Image,
-    
-
-    };
+    const {name, description, Image} = req.body;
+    const updateFields = { name, description };
+    if (Image) updateFields.Image = Image
     const ListInfo = await Item.update(updateFields, {
       where: {
         id: req.params.itemid,
@@ -62,12 +58,10 @@ router.put('/:wishid/:itemid', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   try {
-    const newItem = await Item.create({
-      name: req.body.name,
-      description: req.body.description,
-      Image: req.body.Image,
-      wishlistId: req.params.id,
-    });
+    const {name, description, Image, id} = req.body
+    let newItemData = {name, description, id};
+    if (Image) newItemData.Image = Image;
+    const newItem = await Item.create(newItemData);
     res.json(newItem);
   } catch (error) {
     next(error);
