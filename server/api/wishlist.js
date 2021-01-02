@@ -22,13 +22,10 @@ router.get('/:userId', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   try {
-    const List = await WishList.create({
-      name: req.body.name,
-      description: req.body.description,
-      userId: req.params.id,
-      image: req.body.image
-    });
-
+    const { name, description, image } = req.body;
+    let listData = { name, description, userId: req.params.id }
+    if (image) listData = image;
+    const List = await WishList.create(listData);
     res.json(List);
   } catch (error) {
     next(error);
@@ -39,11 +36,9 @@ router.post('/:id', async (req, res, next) => {
 
 router.put('/:userId/:wishId', async (req, res, next) => {
   try {
-    const updateFields = {
-      name: req.body.name,
-      description: req.body.description,
-      image: req.body.image
-    };
+    const {name, description, image} = req.body;
+    const updateFields = { name, description};
+    if (image) updateFields.image = image;
     const ListInfo = await WishList.update(updateFields, {
       where: { userId: req.params.userId, id: req.params.wishId },
     });

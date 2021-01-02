@@ -10,35 +10,65 @@ async function seed() {
       email: 'amy@email.com',
       password: '123456',
       name: 'Amy',
+      id:1
     }),
     User.create({
       email: 'bruce@email.com',
       password: '123456',
       name: 'Bruce',
+      id: 2
     }),
     User.create({
       email: 'corvus@email.com',
       password: '123456',
       name: 'Corvus',
+      id: 3
     }),
         User.create({
       email: 'darren@email.com',
       password: '123456',
       name: 'Darren',
+      id: 4
     }),
         User.create({
       email: 'evan@email.com',
       password: '123456',
       name: 'Evan',
+      id: 5
     }),
         User.create({
       email: 'fanny@email.com',
       password: '123456',
       name: 'Fanny',
+      id: 6
     }),
   ]);
 
   console.log(`seeded ${users.length} users`);
+
+  const createFollowing = async (name, followerId) => {
+     const user = await User.findOne({
+       where: {
+         name,
+       },
+     });
+     const following = await user.addFollower(followerId);
+
+     return following;
+  }
+
+  const following = await Promise.all([
+    createFollowing("Amy", 2),
+    createFollowing("Amy", 3),
+    createFollowing("Bruce", 4),
+    createFollowing("Bruce", 1),
+    createFollowing("Corvus", 1),
+    createFollowing("Corvus", 2),
+    createFollowing("Corvus", 3)
+  ])
+
+    console.log(`seeded ${following.length} followings`);
+
 
   const groups = await Promise.all([
     Group.create({

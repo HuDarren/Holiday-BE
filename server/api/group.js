@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { Group, User } = require('../db/models');
-const { route } = require('./items');
 module.exports = router;
 
 // Find group & add user
@@ -63,15 +62,10 @@ router.get('/creator/:id', async (req, res, next) => {
 router.post('/:id', async (req, res, next) => {
   try {
     const { name, description, groupImg, match ,budget, exchangeDate} = req.body;
-    const newGroup = await Group.create({
-      name,
-      description,
-      groupImg,
-      match,
-      budget,
-      exchangeDate,
-      userId: req.params.id,
-    });
+    let newGroupData = {name, description, match, budget, userId: req.params.id};
+    if (groupImg) newGroupData.groupImg = groupImg;
+    if (exchangeDate) newGroupData.exchangeDate = exchangeDate;
+    const newGroup = await Group.create(newGroupData);
     res.json(newGroup);
   } catch (error) {
     next(error);
