@@ -58,8 +58,8 @@ router.put('/:wishid/:itemid', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   try {
-    const {name, description, Image, id} = req.body
-    let newItemData = {name, description, id};
+    const {name, description, Image } = req.body
+    let newItemData = {name, description, wishlistId : req.params.id};
     if (Image) newItemData.Image = Image;
     const newItem = await Item.create(newItemData);
     res.json(newItem);
